@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender" additivity="false">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="file" class="ch.qos.logback.core.FileAppender" additivity="false">
+        <file>${logging.base.directory}/ArchiveRedirections.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="consoleAccessLogger" class="ch.qos.logback.core.ConsoleAppender" additivity="false">
+        <encoder>
+            <pattern>%date %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="fileAccessLogger" class="ch.qos.logback.core.FileAppender" additivity="false">
+        <file>${logging.base.directory}/RedirectionRequests.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>RedirectionRequests.%d{yyyy-MM}.log</fileNamePattern>
+            <maxHistory>24</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="uk.ac.ebi.pride.archive.redirections.AccessLogger" level="info">
+        <appender-ref ref="fileAccessLogger" additivity="false"/>
+        <!--<appender-ref ref="consoleAccessLogger"/>-->
+    </logger>
+    <logger name="org.springframework" level="warn"/>
+
+    <root level="warn">
+        <!--<appender-ref ref="console"/>-->
+        <appender-ref ref="file"/>
+    </root>
+
+</configuration>
