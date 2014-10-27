@@ -22,23 +22,26 @@ public class PrideLegacyRedirectionsController {
 
     @RequestMapping(value = "/directLink.do", method = RequestMethod.GET)
     public org.springframework.web.servlet.ModelAndView prideDirectExperimentLinkToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
-        String target = "/directLink.do?experimentAccessionNumber=" + accession;
-        accessLog.info("FROM " + target + " TO: " + PRIDE_LEGACY_URL + target);
-        return new ModelAndView("redirect:" + PRIDE_LEGACY_URL + target);
+//        String target = "/directLink.do?experimentAccessionNumber=" + accession;
+        String target = "/archive/assays/" + accession;
+        accessLog.info("FROM " + target + " TO: " + target);
+        return new ModelAndView("redirect:" + target);
     }
 
     @RequestMapping(value = "/experimentLink.do", method = RequestMethod.GET)
     public org.springframework.web.servlet.ModelAndView prideExperimentLinkToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
-        String target = "/experimentLink.do?experimentAccessionNumber=" + accession;
-        accessLog.info("FROM " + target + " TO: " + PRIDE_LEGACY_URL + target);
-        return new ModelAndView("redirect:" + PRIDE_LEGACY_URL + target);
+//        String target = "/experimentLink.do?experimentAccessionNumber=" + accession;
+        String target = "/archive/assays/" + accession;
+        accessLog.info("FROM " + target + " TO: " + target);
+        return new ModelAndView("redirect:" + target);
     }
 
     @RequestMapping(value = "/experiment.do", method = RequestMethod.GET)
     public org.springframework.web.servlet.ModelAndView prideExperimentToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
-        String target = "/experiment.do?experimentAccessionNumber=" + accession;
-        accessLog.info("FROM " + target + " TO: " + PRIDE_LEGACY_URL + target);
-        return new ModelAndView("redirect:" + PRIDE_LEGACY_URL + target);
+//        String target = "/experiment.do?experimentAccessionNumber=" + accession;
+        String target = "/archive/assays/" + accession;
+        accessLog.info("FROM " + target + " TO: " + target);
+        return new ModelAndView("redirect:" + target);
     }
 
     @RequestMapping(value = "/prideMart.do", method = RequestMethod.GET)
@@ -50,9 +53,10 @@ public class PrideLegacyRedirectionsController {
 
     @RequestMapping( value = "/searchSummary.do", method = RequestMethod.GET)
     public org.springframework.web.servlet.ModelAndView prideSearchToPrideLegacy(@RequestParam("queryTypeSelected") String type, @RequestParam("identificationAccessionNumber") String accession) {
-        String target = "/searchSummary.do?queryTypeSelected=" + type + "&identificationAccessionNumber=" + accession;
-        accessLog.info("FROM " + target + " TO: " + PRIDE_LEGACY_URL + target);
-        return new ModelAndView("redirect:" + PRIDE_LEGACY_URL + target);
+//        String target = "/searchSummary.do?queryTypeSelected=" + type + "&identificationAccessionNumber=" + accession;
+        String target = "/archive/simpleSearch?q=" + accession;
+        accessLog.info("FROM " + target + " TO: " + target);
+        return new ModelAndView("redirect:" + target);
     }
 
 }
