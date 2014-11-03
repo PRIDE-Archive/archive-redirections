@@ -24,7 +24,7 @@ public class PrideLegacyRedirectionsController {
     public org.springframework.web.servlet.ModelAndView prideDirectExperimentLinkToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
 //        String target = "/directLink.do?experimentAccessionNumber=" + accession;
         String target = "/archive/assays/" + accession;
-        accessLog.info("FROM " + target + " TO: " + target);
+        accessLog.info("FROM legacy /directLink.do TO: " + target);
         return new ModelAndView("redirect:" + target);
     }
 
@@ -32,7 +32,7 @@ public class PrideLegacyRedirectionsController {
     public org.springframework.web.servlet.ModelAndView prideExperimentLinkToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
 //        String target = "/experimentLink.do?experimentAccessionNumber=" + accession;
         String target = "/archive/assays/" + accession;
-        accessLog.info("FROM " + target + " TO: " + target);
+        accessLog.info("FROM legacy /experimentLink.do TO: " + target);
         return new ModelAndView("redirect:" + target);
     }
 
@@ -40,7 +40,7 @@ public class PrideLegacyRedirectionsController {
     public org.springframework.web.servlet.ModelAndView prideExperimentToPrideLegacy(@RequestParam("experimentAccessionNumber") String accession) {
 //        String target = "/experiment.do?experimentAccessionNumber=" + accession;
         String target = "/archive/assays/" + accession;
-        accessLog.info("FROM " + target + " TO: " + target);
+        accessLog.info("FROM legacy /experiment.do TO: " + target);
         return new ModelAndView("redirect:" + target);
     }
 
@@ -55,7 +55,7 @@ public class PrideLegacyRedirectionsController {
     public org.springframework.web.servlet.ModelAndView prideSearchToPrideLegacy(@RequestParam("queryTypeSelected") String type, @RequestParam("identificationAccessionNumber") String accession) {
 //        String target = "/searchSummary.do?queryTypeSelected=" + type + "&identificationAccessionNumber=" + accession;
         String target = "/archive/simpleSearch?q=" + accession;
-        accessLog.info("FROM " + target + " TO: " + target);
+        accessLog.info("FROM legacy /searchSummary.do TO: " + target);
         return new ModelAndView("redirect:" + target);
     }
 
