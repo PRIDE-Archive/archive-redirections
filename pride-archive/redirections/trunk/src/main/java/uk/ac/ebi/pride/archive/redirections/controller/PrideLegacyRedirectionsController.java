@@ -2,11 +2,11 @@ package uk.ac.ebi.pride.archive.redirections.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import uk.ac.ebi.pride.archive.redirections.exception.BiomartException;
 
 /**
  * @author Florian Reisinger
@@ -58,5 +58,37 @@ public class PrideLegacyRedirectionsController {
         accessLog.info("FROM legacy /searchSummary.do TO: " + target);
         return new ModelAndView("redirect:" + target);
     }
+
+    @RequestMapping( value = "/biomart/**", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @ResponseBody
+    public String prideBioMartView() {
+        return  "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+                "<html lang=\"en\">\n" +
+                "  <head>\n" +
+                "    <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n" +
+                "    <title>BioMart discontinued</title>\n" +
+                "  </head>\n" +
+                "  <body>\n" +
+                "    <h1>BioMart Error</h1>" +
+                "    <div>The PRIDE BioMart service has been discontinued.</br>" +
+                "    Please consider using the " +
+                "      <a href=\"http://www.ebi.ac.uk/pride/ws/archive\">" +
+                "        PRIDE Archive web service" +
+                "      </a>" +
+                "    instead. Or contact the " +
+                "      <a href=\"mailto:pride-supprot@ebi.ac.uk\">" +
+                "        PRIDE helpdesk" +
+                "      </a>" +
+                "    if you have any questions.</div>" +
+                "  </body>\n" +
+                "</html>";
+    }
+
+    @RequestMapping( value = "/biomart/martservice/**")
+    @ResponseBody
+    public String prideBioMartService() {
+        throw new BiomartException("The Biomart service has been discontinued");
+    }
+
 
 }
